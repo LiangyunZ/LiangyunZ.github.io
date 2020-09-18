@@ -57,10 +57,11 @@ p, li {
   margin-bottom: 10px;
   display: flex;
   flex-flow: row wrap;
+  font-family: 'Lobster Two', cursive;
 }
 
 body > * {
-  background-color: red;
+  background-color: blue;
   padding: 1%;
 }
 
