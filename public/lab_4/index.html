@@ -1,1 +1,47 @@
-hello world
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>Liangyun Zhang's Lab 4</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <h1>Liangyun Zhang's Lab 4</h1>
+
+        <form action = "/api" method="post">
+            <ul class = "flex-outer">
+                <li><label for="fname">First name</label>
+                    <input type="text" id="fname" name="fname" maxlength="140">
+                </li>
+                <li><label for="lname">Last name</label>
+                    <input type="text" id="lname" name="lname" maxlength="140">
+                </li>
+                <li><label for="email">Email</label>
+                    <input type="text" id="email" name="email">
+                </li>
+                <li><label for="phone">Phone</label>
+                    <input type="text" id="phone" name="phone">
+                </li>
+                <li><label for="textfield">Text field</label>
+                    <textarea id="textfield" name="textfield" rows="5" cols="33"></textarea>
+                </li>
+
+                <li><label>Age</label>
+                <div class = "flex-inner">
+                <label for="age1"> 18-35</label>
+                <input type="checkbox" id="age1" name="age1">
+                <label for="age2"> 35-50</label>
+                <input type="checkbox" id="age2" name="age2">
+                <label for="age3"> 50-65</label>
+                <input type="checkbox" id="age3" name="age3">
+                </div>
+                </li>
+            
+                <li class="button">
+                <button type="submit">Submit Form</button>
+                </li>
+            </ul>
+        </form> 
+    
+    </body>
+</html>
