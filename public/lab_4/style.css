@@ -1,59 +1,68 @@
-/* || General setup */
+/*CSS*/
+body {
+  background: #3895a8;
+}
 
-  
-  body {
-    background-color: #6091C3;
-  }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
 
-  h1 {
-    display: flex;
-    justify-content: center;
-  }
+.container {
+  min-height: 100%;
+}
 
-  form {
-    margin: 0 auto;
-    width: 800px;
-    padding: 1em;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  form li + li {
-    margin-top: 1em;
-  }
-  
-  label {
-    display: inline-block;
-    width: 90px;
-    text-align: left;
-  }
-  
-  input, 
-  textarea {
-    font: 1em sans-serif;
-    width: 600px;
-    box-sizing: border-box;
-    margin: 20
-  }
+.header {
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
 
-  textarea {
-    vertical-align: middle;
-    height: 5em;
-  }
+/* Enter YOUR lab styles after this line */
+.flex-outer li{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
-  button {
-    margin-left: .5em;
-  }
+.flex-outer > li > label,
+.flex-outer li p {
+  flex: 1 0 130px;
+  max-width: 225px;
+  padding: 8px;
+}
+ 
+.flex-outer > li > label + *,
+.flex-inner {
+  flex: 1 0 225px;
+}
 
-  .flex-inner {
-    display: inline-flex;
-    width: 600px;
-    font: 1em sans-serif;
-    margin: 20;
-    justify-content: center;
-    white-space: nowrap;
-  }
+.flex-outer button {
+  margin-left: 0px;
+  padding: 6px 12px;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  border-radius: 3px;
+}
+
+.flex-inner li {
+  width: 80px;
+}
+
+.flex-inner {
+  padding: 0 8px;
+  justify-content: space-between;
+}
+
+.flex-outer {
+  max-width:800px;
+  padding: 0 16px;
+}
