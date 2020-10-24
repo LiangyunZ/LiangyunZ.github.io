@@ -54,7 +54,7 @@ body {
 }
 
 .flex-inner li {
-  width: 80px;
+  width: 95px;
 }
 
 .flex-inner {
@@ -65,8 +65,13 @@ body {
 .flex-outer {
   max-width:800px;
   padding: 0 16px;
+  margin: 0 auto;
 }
 
 .flex-outer li {
   align-items: center;
+}
+
+.button {
+  margin-right: 10px;
 }
