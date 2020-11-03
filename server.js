@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import express from 'express';
+import fetch from 'node-fetch';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,12 +18,15 @@ app.use((req, res, next) => {
 });
 
 app.route('/api')
-  .get((req, res) => {
+  .get(async(req, res) => {
     console.log('GET request detected');
   })
   .post((req, res) => {
     console.log('POST request detected');
     console.log('Form data submitted', req.body);
+    const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
+    const json = data.json();
+    console.log('fetch request data', data);
     res.status(200).send('Hello World');
   });
 
