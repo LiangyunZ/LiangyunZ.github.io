@@ -1,6 +1,26 @@
 function convertRestaurantsToCategories(restaurantList) {
   // process your restaurants here!
-  return list;
+  const categoryArray = [];
+  const result = {};
+  for (let i = 0; i < restaurantList.length; i += 1) {
+    categoryArray.push(restaurantList[i].category);
+  }
+  // console.log(categoryArray);
+  for (let i = 0; i < categoryArray.length; i += 1) {
+    if (!result[categoryArray[i]]) {
+      result[categoryArray[i]] = 0;
+    }
+    result[categoryArray[i]] += 1;
+  }
+
+  const reply = Object.keys(result).map((category) => ({
+    y: result[category],
+    label: category
+  }));
+
+  console.log('reply',reply);
+  return reply;
+  ///return list;
 }
 
 function makeYourOptionsObject(datapointsFromRestaurantsList) {
@@ -54,6 +74,17 @@ function runThisWithResultsFromServer(jsonFromServer) {
   // Process your restaurants list
   // Make a configuration object for your chart
   // Instantiate your chart
+
+  CanvasJS.addColorSet('miscAdobe',
+    [
+
+      '#4F61F7',
+      '#5DDDFC',
+      '#60E69F',
+      '#94FC5D',
+      '#F2E75A'
+    ]);
+
   const reorganizedData = convertRestaurantsToCategories(jsonFromServer);
   const options = makeYourOptionsObject(reorganizedData);
   const chart = new CanvasJS.Chart('chartContainer', options);

@@ -2,16 +2,13 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import express from 'express';
-<<<<<<< HEAD
 import fetch from 'node-fetch';
 import { open } from 'sqlite';
 import sqlite3 from 'sqlite3';
-=======
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 
 dotenv.config();
->>>>>>> 1f589382d61739e7e31d3581ed70007a5f201e39
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -29,14 +26,12 @@ app.use((req, res, next) => {
 app.route('/api')
   .get(async (req, res) => {
     console.log('GET request detected');
-<<<<<<< HEAD
   })
   .post(async(req, res) => {
     console.log('POST request detected');
     const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
     const json = await data.json();
     console.log('fetch request data', data);
-=======
     const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
     const json = await data.json();
     console.log('data from fetch', json);
@@ -49,7 +44,6 @@ app.route('/api')
     const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
     const json = await data.json();
     console.log('data from fetch', json);
->>>>>>> 1f589382d61739e7e31d3581ed70007a5f201e39
     res.json(json);
   });
 
