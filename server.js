@@ -3,6 +3,8 @@
 /* eslint-disable no-unused-vars */
 import express from 'express';
 import fetch from 'node-fetch';
+import { open } from 'sqlite';
+import sqlite3 from 'sqlite3';
 
 const app = express();
 const port = process.env.PORT || 3000;
