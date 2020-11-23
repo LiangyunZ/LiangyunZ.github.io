@@ -12,10 +12,17 @@ function range(int) {
   return arr;
 }
 
+<<<<<<< HEAD
 function sortByKey(org, compare, key) {
   if (org[key] < compare[key]) {
     return -1;
   } if (org[key] > compare[key]) {
+=======
+function sortFunction(org, comparison, key) {
+  if (org[key] < comparison[key]) {
+    return -1;
+  } if (org[key] > comparison[key]) {
+>>>>>>> 1f589382d61739e7e31d3581ed70007a5f201e39
     return 1;
   }
   return 0;
@@ -24,6 +31,7 @@ function sortByKey(org, compare, key) {
 document.body.addEventListener('submit', async (e) => {
   e.preventDefault(); // this stops whatever the browser wanted to do itself.
   const form = $(e.target).serializeArray(); // here we're using jQuery to serialize the form
+  // set fave to yes
   fetch('/api', {
     method: 'POST',
     headers: {
@@ -32,6 +40,7 @@ document.body.addEventListener('submit', async (e) => {
     body: JSON.stringify(form)
   })
     .then((fromServer) => fromServer.json())
+<<<<<<< HEAD
     .then((fromServer) => {
       console.log(fromServer)
       if (document.querySelector('.flex-inner')) {
@@ -54,6 +63,16 @@ document.body.addEventListener('submit', async (e) => {
         $(li).append(`<label for=${el.code}>${el.name}</label>`);
         $(ul).append(li);
       });
+=======
+    .then((jsonFromServer) => {
+      // You're going to do your lab work in here. Replace this comment.
+      
+      console.log('jsonFromServer', jsonFromServer);
+      const reverseList = newArr2.sort((a, b) => sortFunction(b, a, 'name'));
+>>>>>>> 1f589382d61739e7e31d3581ed70007a5f201e39
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err)
+      // set fave to no
+    });
 });
