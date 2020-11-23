@@ -2,11 +2,10 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import express from 'express';
+import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 import { open } from 'sqlite';
 import sqlite3 from 'sqlite3';
-import dotenv from 'dotenv';
-import fetch from 'node-fetch';
 
 dotenv.config();
 
@@ -32,20 +31,9 @@ app.route('/api')
     const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
     const json = await data.json();
     console.log('fetch request data', data);
-    const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
-    const json = await data.json();
     console.log('data from fetch', json);
     res.json(json);
   })
-  .post(async (req, res) => {
-    console.log('POST request detected');
-    console.log('Form data in res.body', req.body);
-
-    const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
-    const json = await data.json();
-    console.log('data from fetch', json);
-    res.json(json);
-  });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
