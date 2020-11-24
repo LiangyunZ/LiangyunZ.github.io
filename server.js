@@ -27,9 +27,6 @@ async function databaseInitialize(dbSettings) {
 
 		const data = await dataFetch();
 
-		const test = await db.get("SELECT * FROM restaurants")
-		console.log(test);
-
 	}
 	catch(e) {
 		console.log("Error loading Database");
