@@ -14,7 +14,7 @@ const port = process.env.PORT || 3000;
 const dbSettings = {
 	filename: './tmp/database.db',
 	driver: sqlite3.Database
-	};
+  };
 
 async function databaseInitialize(dbSettings) {
 	try {
@@ -24,13 +24,25 @@ async function databaseInitialize(dbSettings) {
 			restaurant_name TEXT,
 			category TEXT)
 			`)
-		console.log("Success");
+
+		const data = await dataFetch();
+
+		const test = await db.get("SELECT * FROM restaurants")
+		console.log(test);
 
 	}
 	catch(e) {
 		console.log("Error loading Database");
+		console.log(e);
 
 	}
+
+async function dataFetch() {
+	const url = "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json";
+	const response = await fetch(url);
+
+	return response.json()
+
 }
 
 app.use(express.urlencoded({ extended: true }));
