@@ -19,13 +19,12 @@ const dbSettings = {
 async function databaseInitialize(dbSettings) {
 	try {
 		const db = await open(dbSettings);
-		await db.exec("CREATE TABLE IF NOT EXISTS restaurants (
+		await db.exec(`CREATE TABLE IF NOT EXISTS restaurants (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
 			restaurant_name TEXT,
 			category TEXT)
-			")
-		const test = await db.get("SELECT * FROM restaurants")
-		console.log(test);
+			`)
+		console.log("Success");
 
 	}
 	catch(e) {
@@ -33,7 +32,6 @@ async function databaseInitialize(dbSettings) {
 
 	}
 }
-
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
