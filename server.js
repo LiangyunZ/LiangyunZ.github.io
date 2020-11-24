@@ -4,17 +4,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
-import { open } from 'sqlite';
-import sqlite3 from 'sqlite3';
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
-const dbSettings = {
-	filename: './tmp/database.db',
-	driver: sqlite3.Database
-	};
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -27,17 +21,19 @@ app.use((req, res, next) => {
 });
 
 app.route('/api')
-  .get(async (req, res) => {
+  .get((req, res) => {
     console.log('GET request detected');
+    res.send(`Lab 5 for ${process.env.NAME}`);
   })
-  .post(async(req, res) => {
+  .post(async (req, res) => {
     console.log('POST request detected');
+    console.log('Form data in res.body', req.body);
+
     const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
     const json = await data.json();
-    console.log('fetch request data', data);
     console.log('data from fetch', json);
     res.json(json);
-  })
+  });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
