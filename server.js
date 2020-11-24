@@ -27,12 +27,17 @@ async function databaseInitialize(dbSettings) {
 
 		const data = await dataFetch();
 
+		const test = await db.get("SELECT * FROM restaurants")
+		console.log(test);
+
 	}
 	catch(e) {
 		console.log("Error loading Database");
 		console.log(e);
 
 	}
+};
+
 
 async function dataFetch() {
 	const url = "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json";
@@ -40,7 +45,7 @@ async function dataFetch() {
 
 	return response.json()
 
-}
+};
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
