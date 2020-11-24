@@ -16,6 +16,25 @@ const dbSettings = {
 	driver: sqlite3.Database
 	};
 
+async function databaseInitialize(dbSettings) {
+	try {
+		const db = await open(dbSettings);
+		await db.exec("CREATE TABLE IF NOT EXISTS restaurants (
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			restaurant_name TEXT,
+			category TEXT)
+			")
+		const test = await db.get("SELECT * FROM restaurants")
+		console.log(test);
+
+	}
+	catch(e) {
+		console.log("Error loading Database");
+
+	}
+}
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
