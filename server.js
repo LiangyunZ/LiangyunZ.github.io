@@ -51,7 +51,7 @@ async function foodDataFetcher() {
 	const response = await fetch(url);
 
 	return response.json()
-
+	
 };
 
 async function dataInput(data) {
@@ -83,8 +83,6 @@ async function databaseRetriever(db) {
 	return result;
   };
 
-foodDataFetcher();
-dataInput(data);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
