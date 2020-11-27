@@ -19,13 +19,20 @@ const dbSettings = {
 async function databaseInitialize(dbSettings) {
 	try {
 		const db = await open(dbSettings);
-		await db.exec(`CREATE TABLE IF NOT EXISTS restaurants (
+		await db.exec(`CREATE TABLE IF NOT EXISTS food (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
-			restaurant_name TEXT,
-			category TEXT)
+			name TEXT,
+			category TEXT,
+			inspection_date DATE,
+			inspection_results TEXT,
+			city TEXT,
+			state TEXT,
+			zip TEXT,
+			owner TEXT,
+			type TEXT)
 			`)
 
-		const data = await dataFetch();
+		const data = await foodDataFetcher();
 
 		const test = await db.get("SELECT * FROM restaurants")
 		console.log(test);
@@ -39,13 +46,45 @@ async function databaseInitialize(dbSettings) {
 };
 
 
-async function dataFetch() {
+async function foodDataFetcher() {
 	const url = "https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json";
 	const response = await fetch(url);
 
 	return response.json()
 
 };
+
+async function dataInput(data) {
+	try {
+		const name = data.name;
+		const category = data.category;
+		const inspection_date = data.inspection_date;
+		const inspection_results = data.inspection_results;
+		const city = data.city;
+		const state = data.state;
+		const zip = data.zip;
+		const owner = data.owner;
+		const type = data.type;
+
+		await db.exec(`INSERT INTO food (name, category, inspection_date, inspection_results, city, state, zip, owner, type) 
+			VALUES ("${name}", "${category}", "${inspection_date}", "${inspection_results}", "${city}", "${state}", "${zip}", "${owner}", "${type}")`);
+		console.log(`${name} and ${category} inserted`);
+		}
+
+	catch(e) {
+		console.log('Error on insertion');
+		console.log(e);
+		}
+
+};
+
+async function databaseRetriever(db) {
+	const result = await db.all(`SELECT category, COUNT(name) FROM food GROUP BY category`);
+	return result;
+  };
+
+foodDataFetcher();
+dataInput(data);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -75,3 +114,18 @@ app.route('/api')
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
 });
+
+app.route('/sql')
+  .get((req, res) => {
+    console.log('GET detected');
+  })
+  .post(async (req, res) => {
+    console.log('POST request detected');
+    console.log('Form data in res.body', req.body);
+    // This is where the SQL retrieval function will be:
+    // Please remove the below variable
+	const db = await open(dbSettings);
+    const output = await databaseRetriever(db);
+    // This output must be converted to SQL
+    res.json(output);
+  });

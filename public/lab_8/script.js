@@ -1,28 +1,3 @@
-function convertRestaurantsToCategories(restaurantList) {
-  // process your restaurants here!
-  const categoryArray = [];
-  const result = {};
-  for (let i = 0; i < restaurantList.length; i += 1) {
-    categoryArray.push(restaurantList[i].category);
-  }
-  // console.log(categoryArray);
-  for (let i = 0; i < categoryArray.length; i += 1) {
-    if (!result[categoryArray[i]]) {
-      result[categoryArray[i]] = 0;
-    }
-    result[categoryArray[i]] += 1;
-  }
-
-  const reply = Object.keys(result).map((category) => ({
-    y: result[category],
-    label: category
-  }));
-
-  console.log('reply',reply);
-  return reply;
-  ///return list;
-}
-
 function makeYourOptionsObject(datapointsFromRestaurantsList) {
   // set your chart configuration here!
   CanvasJS.addColorSet('customColorSet1', [//colorSet Array
@@ -68,9 +43,9 @@ function makeYourOptionsObject(datapointsFromRestaurantsList) {
   };
 }
 
-function runThisWithResultsFromServer(jsonFromServer) {
-  console.log('jsonFromServer', jsonFromServer);
-  sessionStorage.setItem('restaurantList', JSON.stringify(jsonFromServer)); // don't mess with this, we need it to provide unit testing support
+function runThisWithResultsFromServer(output) {
+  console.log('jsonFromServer', output);
+  sessionStorage.setItem('restaurantList', JSON.stringify(output)); // don't mess with this, we need it to provide unit testing support
   // Process your restaurants list
   // Make a configuration object for your chart
   // Instantiate your chart
@@ -85,7 +60,7 @@ function runThisWithResultsFromServer(jsonFromServer) {
       '#F2E75A'
     ]);
 
-  const reorganizedData = convertRestaurantsToCategories(jsonFromServer);
+  const reorganizedData = output;
   const options = makeYourOptionsObject(reorganizedData);
   const chart = new CanvasJS.Chart('chartContainer', options);
   chart.render();
@@ -95,7 +70,7 @@ function runThisWithResultsFromServer(jsonFromServer) {
 document.body.addEventListener('submit', async (e) => {
   e.preventDefault(); // this stops whatever the browser wanted to do itself.
   const form = $(e.target).serializeArray();
-  fetch('/api', {
+  fetch('/sql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -103,7 +78,7 @@ document.body.addEventListener('submit', async (e) => {
     body: JSON.stringify(form)
   })
     .then((fromServer) => fromServer.json())
-    .then((jsonFromServer) => runThisWithResultsFromServer(jsonFromServer))
+    .then((jsonFromServer) => runThisWithResultsFromServer(output))
     .catch((err) => {
       console.log(err);
     });
