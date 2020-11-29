@@ -84,6 +84,9 @@ async function databaseRetriever(db) {
   };
 
 
+foodDataFetcher();
+dataInput();
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
